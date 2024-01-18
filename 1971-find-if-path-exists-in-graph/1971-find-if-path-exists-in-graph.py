@@ -18,5 +18,8 @@ class Solution:
                     result = dfs(neighbour)
                     if result:
                         return True
+                
+                # Add this return statement for the case when destination is not reached
+                return False
                     
         return dfs(source)
