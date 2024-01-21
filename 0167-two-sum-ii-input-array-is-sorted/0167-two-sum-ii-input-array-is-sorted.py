@@ -3,13 +3,11 @@ class Solution:
         l, r = 0, len(numbers) - 1
         
         while l < r:
-            if numbers[r] + numbers[l] > target:
+            curSum = numbers[l] + numbers[r]
+            if curSum > target:
                 r -= 1
-            elif numbers[r] + numbers[l] < target:
+            elif curSum < target:
                 l += 1
-            elif numbers[r] + numbers[l] == target:
+            else:
                 return [l+1, r+1]
-        return []
-                
-                
-            
+        return[]
