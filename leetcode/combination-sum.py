@@ -1,26 +1,33 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        res = []
         total = 0
-        comb = []
-        ans = []
         candidates.sort()
 
-        def backTrack(index):
-            nonlocal total, target
-
+        def backTrack(index, comb):
+            nonlocal target, total
+            
             if total == target:
-                ans.append(comb.copy())
-                return
-            if candidates[index] > target or total > target:
+                return res.append(comb[:])
+            if target < candidates[index] or target < total:
                 return
 
             for i in range(index, len(candidates)):
-                total += candidates[i]
                 comb.append(candidates[i])
+                total += candidates[i]
                 if total <= target:
-                    backTrack(i)
+                    backTrack(i, comb)
                 total -= comb.pop()
+        
+        backTrack(0, [])
+        return res
 
-        backTrack(0)
-        return ans
+
+
+
+
+
+
+
+
 
