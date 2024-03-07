@@ -11,9 +11,9 @@ class Solution:
 
         while lo <= hi:
             mid = (lo+hi) // 2
-            if guess(mid) == 1:
+            if guess(mid) > 0:
                 lo = mid + 1
-            elif guess(mid) == -1:
+            elif guess(mid) < 0:
                 hi = mid - 1
             else:
                 return mid
