@@ -3,6 +3,8 @@ class Solution:
         left, right = 0, len(nums) - 1
         res = nums[0]
 
+        if len(nums) == 2:
+            return min(nums)
         while left <= right:
             mid = (left+right) //2
 
