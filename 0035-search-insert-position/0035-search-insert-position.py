@@ -10,4 +10,4 @@ class Solution:
                 lo = mid + 1
             else:
                 return mid
-        return mid+1 if target >  nums[mid] else mid
+        return lo
