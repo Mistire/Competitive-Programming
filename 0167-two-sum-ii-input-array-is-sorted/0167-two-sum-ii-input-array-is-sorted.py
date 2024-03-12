@@ -4,7 +4,7 @@ class Solution:
 
         while left <= right:
             if nums[left] + nums[right] == target:
-                return [left+1, max(right+1, right)]
+                return [left+1, right+1]
             elif  nums[left] + nums[right] < target:
                 left += 1
             else:
