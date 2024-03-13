@@ -1,11 +1,27 @@
 class Solution:
     def findMaxAverage(self, nums: List[int], k: int) -> float:
         maxAvg = float('-inf')
-        windowSum = 0
-        
-        for i in range(len(nums)):
-            windowSum += nums[i]
-            if i >= k - 1:
-                maxAvg = max(maxAvg, windowSum/k)
-                windowSum -= nums[i-k+1]
+        total = 0
+        left = 0
+
+        for right in range(len(nums)):
+            total += nums[right]
+            if right - left + 1 == k:
+                maxAvg = max((total/k), maxAvg)
+                total -= nums[left]
+                left += 1
+
         return maxAvg
+
+
+        
+
+        
+
+
+
+
+
+
+
+
