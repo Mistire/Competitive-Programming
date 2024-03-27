@@ -1,24 +1,16 @@
 class Solution:
     def countPrimes(self, n: int) -> int:
-        if n <= 2:
+        if n < 2:
             return 0
+
         prime = [True for _ in range(n)]
         prime[0] = prime[1] = False
-        i = 2
-        while i*i <n:
 
+        for i in range(2, math.ceil(math.sqrt(n))):
             if prime:
-                j = i*i
-
-                while j < n:
+                for j in range(i*i,n,i):
                     prime[j] = False
-
-                    j += i
-            i += 1
-        res = Counter(prime)
-        for num,val in res.items():
-            if num :
-                return val
+        return sum(prime)
         
        
 
