@@ -1,11 +1,10 @@
 class Solution:
     def distinctPrimeFactors(self, nums: List[int]) -> int:
-        res = reduce((lambda x, y: x * y), nums)
+        prSet = set()
         def prime(num):
-            prSet = set()
             d = 2
             while d*d <= num:
-                while num % d == 0:
+                if num % d == 0:
                     prSet.add(d)
                     num //= d
                 else:
@@ -13,4 +12,7 @@ class Solution:
             if num > 1:
                 prSet.add(num)
             return prSet
-        return len(prime(res))
+        for n in nums:
+            prime(n)
+        
+        return len(prSet)
