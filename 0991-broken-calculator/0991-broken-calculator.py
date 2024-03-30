@@ -3,9 +3,9 @@ class Solution:
         count = 0
 
         while target > startValue:
-            count += 1
             if target % 2 != 0:
                 target += 1
             else:
                 target //= 2
+            count += 1
         return count + startValue - target
