@@ -24,7 +24,7 @@ class Solution:
                     size[p2] += size[p1]
             return True
         for n1, n2 in edges:
-            if not union(n1, n2):
+            if union(n1, n2) == False:
                 return [n1, n2]
         
                 
