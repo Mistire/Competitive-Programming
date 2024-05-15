@@ -8,9 +8,13 @@ class Solution:
             
             if (day, buy_stock) not in memo:
                 if buy_stock == True:
-                    memo[(day, buy_stock)] = max((prices[day] + dp(day + 1, False)), dp(day + 1, True))
+                    sell = prices[day] + dp(day + 1, False)
+                    leave = dp(day + 1, True)
+                    memo[(day, buy_stock)] = max(sell, leave)
                 else:
-                    memo[(day, buy_stock)] = max(dp(day + 1, True) - prices[day], dp(day + 1, False))
+                    buy = dp(day + 1, True) - prices[day]
+                    leave = dp(day + 1, False)
+                    memo[(day, buy_stock)] = max(buy, leave)
             
             return memo[(day, buy_stock)]
 
