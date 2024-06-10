@@ -1,8 +1,7 @@
 class Solution:
     def scoreOfString(self, s: str) -> int:
-        arr = [ord(i) for i in s]
         tot = 0
         
-        for i in range(1, len(arr)):
-            tot += abs(arr[i-1] - arr[i])
+        for i in range(1, len(s)):
+            tot += abs(ord(s[i-1]) - ord(s[i]))
         return tot
