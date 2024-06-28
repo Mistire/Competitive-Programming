@@ -1,27 +1,38 @@
 class Solution:
     def maxDistance(self, position: List[int], m: int) -> int:
-        nums = []
         position.sort()
-        nums.append(position[0])
-        nums.append(position[-1])
-
-        if m == len(nums):
-            return position[-1] - position[0]
-
-        left = position[0]
+        left = 0
         right = position[-1]
+        
 
-        while left <= right and len(nums) != m:
+        def is_valid(gap):
+            count = 0
+            max_gap = float('-inf')
+            for basket in position:
+                if basket - max_gap >= gap:
+                    max_gap = basket
+                    count += 1
+            return count >= m
+            
+
+        
+
+        while left < right:
             mid = (left+right) // 2
-            if m < mid:
-                nums.append(mid)
-            elif m > mid:
+            if is_valid(mid+1):
                 left = mid + 1
             else:
-                right = mid -1
-        nums.sort()
-        print(nums)
-        return nums[1] - nums[0]
+                right = mid
+        
+        return left
+
+       
+        
+        
+
+
+
+         
 
 
 
