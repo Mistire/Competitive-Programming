@@ -11,10 +11,7 @@ class Solution:
 
         def backtrack(idx):
             if idx == len(nums):
-                for num in dp:
-                    if num != target:
-                        return False
-                return True
+                return all(num == target for num in dp)
             
             for i in range(k):
                 
@@ -24,7 +21,8 @@ class Solution:
                     if backtrack(idx+1):
                         return True
                     dp[i] -= nums[idx]
-                if dp[i] == 0: break
+                if dp[i] == 0: 
+                    break
                 
             return False
 
