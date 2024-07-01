@@ -1,32 +1,34 @@
 class Solution:
     def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
+        n = len(nums)
         total = sum(nums)
-
-        if total % k:
+        if total % k != 0:
             return False
+        
+        
+        target = total // k
+        dp = [0] * k
 
-        reqSum = total // k
-        subSets = [0] * k
-        nums.sort(reverse = True)
-
-        def recurse(i):
-            if i == len(nums):    
+        def backtrack(idx):
+            if idx == len(nums):
+                for num in dp:
+                    if num != target:
+                        return False
                 return True
-
-            for j in range(k):
-                if subSets[j] + nums[i] <= reqSum:
-                    subSets[j] += nums[i]
-
-                    if recurse(i + 1):
+            
+            for i in range(k):
+                
+                if nums[idx] + dp[i] <= target:
+                    dp[i] += nums[idx]
+                    
+                    if backtrack(idx+1):
                         return True
-
-                    subSets[j] -= nums[i]
-
-                    # Important line, otherwise function will give TLE
-                    if subSets[j] == 0:
-                        break
-
-
+                    dp[i] -= nums[idx]
+                if dp[i] == 0: break
+                
             return False
 
-        return recurse(0)
+        return backtrack(0)
+
+        
+        
