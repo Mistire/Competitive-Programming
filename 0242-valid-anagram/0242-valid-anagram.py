@@ -1,4 +1,4 @@
 class Solution:
-    def isAnagram(self, s: str, t: str) -> bool:
-        return Counter(s) == Counter(t)
+    def isAnagram(self, st: str, te: str) -> bool:
+        return Counter(st) == Counter(te)
         
