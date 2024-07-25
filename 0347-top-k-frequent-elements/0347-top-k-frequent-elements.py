@@ -1,7 +1,7 @@
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        num_count = Counter(nums)
-        num_arr = [(val, key) for key, val in num_count.items()]
-        num_large = nlargest(k, num_arr)
-        res = [key for val, key in num_large]
+        nums_count = Counter(nums)
+        nums_tup = [(val, key) for key, val in nums_count.items()]
+        nums_val = heapq.nlargest(k, nums_tup)
+        res = [key for (val, key) in nums_val]
         return res
