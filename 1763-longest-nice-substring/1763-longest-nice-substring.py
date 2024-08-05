@@ -1,14 +1,14 @@
 class Solution:
     def longestNiceSubstring(self, s: str) -> str:
         def is_nice(sub):
-            bitmask_lower = 0
-            bitmask_upper = 0
+            bitmsk_lower = 0
+            bitmsk_upper = 0
             for char in sub:
                 if char.islower():
-                    bitmask_lower |= 1 << (ord(char) - ord('a'))
+                    bitmsk_lower |= 1 << (ord(char) - ord('a'))
                 else:
-                    bitmask_upper |= 1 << (ord(char) - ord('A'))
-            return bitmask_lower == bitmask_upper
+                    bitmsk_upper |= 1 << (ord(char) - ord('A'))
+            return bitmsk_lower == bitmsk_upper
 
         longest = ""
         for i in range(len(s)):
