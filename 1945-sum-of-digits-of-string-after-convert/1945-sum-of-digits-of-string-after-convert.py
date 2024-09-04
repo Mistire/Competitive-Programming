@@ -1,19 +1,17 @@
 class Solution:
     def getLucky(self, s: str, k: int) -> int:
-        num_s = []
-        for i in range(len(s)):
-            num_s.append(str(ord(s[i])-96))
-        ss = "".join(num_s)
+        num_s = ""
+        res = 0
 
-        tot = 0
+        for i in range(len(s)):
+            num_s += str(ord(s[i]) - 96)
         
-        while k != 0:
-            num = 0
-            for i in ss:
-                num += int(i)
-            tot = num
-            ss = str(num)
-            k-=1
-                
-        return tot
+        while k > 0:
+            num_tot = 0
+            for strs in num_s:
+                num_tot += int(strs)
+            res = num_tot
+            k -= 1
+            num_s = str(num_tot)
         
+        return res
