@@ -1,31 +1,23 @@
 class Solution:
     def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
-        graph = {i: [] for i in range(n)}
-        for u, v, w in flights:
-            graph[u].append((v, w))
+         # Step 1: Initialize the distance array
+        dist = [float('inf')] * n
+        dist[src] = 0  # The cost to reach the source city is 0
         
-        # Step 2: Min-heap to store (price, city, stops)
-        heap = [(0, src, 0)]  # (current cost, current city, number of stops)
+        # A temporary distance array to store results for the current iteration
+        temp_dist = dist[:]
         
-        # Step 3: Distance table, but now we track the best cost with exact stops
-        dist = {(src, 0): 0}  # (city, stops) => cost
-        
-        while heap:
-            cost, node, stops = heapq.heappop(heap)
+        # Step 2: Perform K+1 relaxations (because K stops means K+1 edges)
+        for i in range(k + 1):
+            # Iterate over all the flights (edges)
+            for u, v, w in flights:
+                # If the source city has been reached
+                if dist[u] != float('inf'):
+                    # Relax the edge if a cheaper price is found
+                    temp_dist[v] = min(temp_dist[v], dist[u] + w)
             
-            # If we reach the destination, return the cost
-            if node == dst:
-                return cost
-            
-            # If we have reached the stop limit, skip this node
-            if stops > k:
-                continue
-            
-            # Process all the neighbors of the current node
-            for neighbor, price in graph[node]:
-                new_cost = cost + price
-                if (neighbor, stops + 1) not in dist or new_cost < dist[(neighbor, stops + 1)]:
-                    dist[(neighbor, stops + 1)] = new_cost
-                    heapq.heappush(heap, (new_cost, neighbor, stops + 1))
+            # Update the main distance array with this iteration's results
+            dist = temp_dist[:]
         
-        return -1  # No valid path found
+        # Step 3: Check if we found a valid path to the destination
+        return dist[dst] if dist[dst] != float('inf') else -1
