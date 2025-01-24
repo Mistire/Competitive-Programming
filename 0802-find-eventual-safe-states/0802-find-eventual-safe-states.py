@@ -1,7 +1,7 @@
 class Solution:
     def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
         safe = {}
-        res = []
+        ans = []
 
         def dfs(i):
             if i in safe:
@@ -16,7 +16,7 @@ class Solution:
 
         for i in range(len(graph)):
             if dfs(i):
-                res.append(i)
-        return res
+                ans.append(i)
+        return ans
 
         
