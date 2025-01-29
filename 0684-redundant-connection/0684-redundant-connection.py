@@ -12,8 +12,6 @@ class Solution:
             p1 = find(x)
             p2 = find(y)
 
-            if p1 == p2:
-                return False
 
             if p1 != p2:
                 if size[p1] > size[p2]:
@@ -22,7 +20,10 @@ class Solution:
                 else:
                     parent[p1] = p2
                     size[p2] += size[p1]
-            return True
+            if p1 == p2:
+                return False
+            else: 
+                return True
         for n1, n2 in edges:
             if union(n1, n2) == False:
                 return [n1, n2]
